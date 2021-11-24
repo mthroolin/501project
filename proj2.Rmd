@@ -2,20 +2,26 @@
 title: "Compound Poisson Processes"
 author: "Noah Gblonyah, Seth Okyere, and Michael Throolin"
 date: "10 December 2021"
-output: pdf_document
+output: 
+  pdf_document: 
+      number_sections: true
 header-includes:
    - \usepackage{amsmath}
    - \usepackage{amsthm}
+   - \usepackage[style=authoryear, backend=bibtex]{biblatex}
+   - \usepackage{biblatex}
+   - \addbibresource{bibliography.bib}
+bibliography: bibliography.bib
 ---
-\newtheorem*{theorem}{Theorem}
-\newtheorem*{definition}{Definition}
-\newtheorem*{example}{Example}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Concept
+# Concept
 
 \begin{definition}[Counting Processes]
 A random process $\{N(t), t \in [0,\infty) \}$ is a counting process if,
@@ -42,9 +48,10 @@ A compound poisson process S(t) is defined as follows:
 \end{enumerate}
 \end{definition}
 
-## Examples and Exploration
+# Examples and Exploration
 
-## Sources
-https://www.probabilitycourse.com/chapter11/11_1_1_counting_processes.php
+# References
 
-https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.734.750&rep=rep1&type=pdf
+---
+nocite: '@*'
+...
