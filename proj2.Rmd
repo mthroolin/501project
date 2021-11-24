@@ -3,12 +3,34 @@ title: "Poisson Processes"
 author: "Michael Throolin"
 date: "11/17/2021"
 output: pdf_document
+header-includes:
+   - \usepackage{amsmath}
+   - \usepackage{amsthm}
 ---
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{definition}{Definition}
+\newtheorem*{example}{Example}
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Concept
+
+\begin{definition}[Counting Processes]
+A random process $\{N(t), t \in [0,\infty) \}$ is a counting process if,
+\begin{enumerate}
+\item $N(0) = 0$.
+\item $N(t) \in \{0,1,2,3,4,...\}$ and is non-decreasing.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Poisson Processes]
+A random process $N(t)$ is a poisson process with rate $\lambda$ if,
+\begin{enumerate}
+\item $N(t)$ has independent increments. That is the set $N(t_j+s_j)-N(t_j) ,~ j \in \{0,1,2,...,n\}$ is independent for each non-overlapping increment $(t_j, t_j+s_j]$.
+\item For all $ t \geq 0$ and $h >0$ ,  $N(t+h) -N(t)  \sim POIS(\Lambda)$ where $\Lambda = \int_t^{t+h} \lambda (z) dz$.
+\end{enumerate}
+\end{definition}
 
 ## Examples and Exploration
