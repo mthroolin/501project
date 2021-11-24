@@ -1,7 +1,7 @@
 ---
-title: "Poisson Processes"
-author: "Michael Throolin"
-date: "11/17/2021"
+title: "Compound Poisson Processes"
+author: "Noah Gblonyah, Seth Okyere, and Michael Throolin"
+date: "10 December 2021"
 output: pdf_document
 header-includes:
    - \usepackage{amsmath}
@@ -33,4 +33,18 @@ A random process $N(t)$ is a poisson process with rate $\lambda$ if,
 \end{enumerate}
 \end{definition}
 
+\begin{definition}[Compound Poisson Process]
+A compound poisson process S(t) is defined as follows:
+\begin{enumerate}
+\item For $t>0, S(t) = \sum_{i=1}^{N(t)} X_i$, where $N(t)$ is a poisson process with rate function $\lambda$,
+\item All random variables $X_i$ and $\{N(t), t>0 \}$ are independent and identically distributed,
+\item $N(t) =0 \implies S(0) = 0$.
+\end{enumerate}
+\end{definition}
+
 ## Examples and Exploration
+
+## Sources
+https://www.probabilitycourse.com/chapter11/11_1_1_counting_processes.php
+
+https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.734.750&rep=rep1&type=pdf
