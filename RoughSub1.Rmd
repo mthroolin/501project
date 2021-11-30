@@ -1,0 +1,150 @@
+---
+title: "Compound Poisson Application in Actuarial Risk Modeling"
+author: "Noah Gblonyah, Seth Okyere, and Micheal Throolin "
+date: ""
+output: 
+  pdf_document: 
+      number_sections: true
+header-includes:
+   - \usepackage[style=authoryear, backend=bibtex]{biblatex}
+   - \usepackage{biblatex}
+   - \addbibresource{bibliography.bib}
+bibliography: bibliography.bib      
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction 
+
+The objective of this project is to study a probability model to describe the aggregate claims by an insurance system occurring in a finite time period. The insurance system could be a single policy, a group insurance contract, a business line, or an entire book of an insurer's business. In this study, aggregate claims refer to either the number or the amount of claims from a portfolio of insurance contracts. However, the modeling framework can be readily applied in the more general setup.
+
+In actuarial applications we often work with loss distributions for insurance products. The Compound Poisson distribution arises in many situations in the theory of risk. For example, in property and casualty insurance, we may develop a compound Poisson model for the losses under a single policy or a whole portfolio of policies. Similarly, in life insurance, we may develop a loss distribution for a portfolio of policies, often by stochastic simulation. 
+
+Profit and loss distributions are also important in banking. 
+
+When employers (insurers) provide health insurance to their employees (insureds), they are concerned about __claim frequency__, the random number of claims filed, and __claim severity__, the random size of each claim. However, they are especially concerned about __aggregate claims__, the sum total of all the claims. This is the sum of a random number of random variables, and as such is extremely complicated to analyze; such a probability distribution is called a  __compound distribution__. If __frequency__ is assumed to follow a Poisson process and the __severities__ are independent and all have the same probability distribution, the result is a compound Poisson process.
+
+# Definitions
+## Counting Processes 
+A random process $\{N(t), t \in [0,\infty) \}$ is a counting process if,
+\begin{enumerate}
+\item $N(0) = 0$.
+\item $N(t) \in \{0,1,2,3,4,...\}$ and is non-decreasing.
+\end{enumerate}
+
+## Poisson Processes
+A counting process $N(t)$ is a Poisson process with rate $\lambda$ if,
+\begin{enumerate}
+\item $N(t)$ has independent increments. That is the set $N(t_j+s_j)-N(t_j) ,~ j \in \{0,1,2,...,n\}$ is independent for each non-overlapping increment $(t_j, t_j+s_j]$.
+\item For all $ t \geq 0$ and $h >0$ ,  $N(t+h) -N(t)  \sim POIS(\Lambda)$ where $\Lambda = \int_t^{t+h} \lambda (z) dz$.
+\end{enumerate}
+
+## Compound Poisson Process
+A compound Poisson process $S(t)$ is defined as follows:
+\begin{enumerate}
+\item For $t>0, S(t) = \sum_{i=1}^{N(t)} X_i$, where $N(t)$ is a poisson process with rate function $\lambda$,
+\item All random variables $X_i$ and $\{N(t), t>0 \}$ are independent and identically distributed,
+\item $N(t) =0 \implies S(0) = 0$.
+\end{enumerate}
+
+# Applications of Compound Poisson 
+
+_In 1993, the Chicago Board of Trade introduced a futures contract on financial index that reflects the insurance claims emerging from catastrophes in a portfolio of policies. A compound Poisson model was used to model the contract when the frequency of the catastrophe was counted using the Poisson process._
+
+Consider an insurance portfolio of $n$ individual contracts, and let $S$ denote the aggregate losses of the portfolio in a given time period. There are two approaches to modeling the aggregate losses $S$, the __individual risk model__ and the collective risk model. The individual risk model emphasizes the loss from each individual contract and represents the aggregate losses as:
+\[S_n=X_1 +X_2 +\cdots+X_n,\] 
+
+where,
+
+- $X_i~(i=1,\ldots,n)$ is interpreted as the loss amount from the  
+$i^{th}$ contract. 
+
+- $n$ denotes the number of contracts in the portfolio and thus is a fixed number rather than a random variable.
+
+For the individual risk model, one usually assumes the $X_i$'s are independent. Because of different contract features such as coverage and exposure, the $X_i$'s are not necessarily identically distributed. A notable feature of the distribution of each $X_i$ is the probability mass at zero corresponding to the event of no claims.
+
+The __collective risk model__ represents the aggregate losses in terms of a frequency distribution and a severity distribution: \[S_N=X_1 +X_2 + \cdots + X_N .\]
+
+Here, one thinks of a random number of claims $N$ that may represent either the number of losses or the number of payments. In contrast, in the individual risk model, we use a fixed number of contracts $n$. We consider $X_1, X_2, \ldots, X_N$ as representing the amount of each loss. Each loss may or may not correspond to a unique contract. For instance, there may be multiple claims arising from a single contract. It is natural to think about $X_i>0$ because if $X_i>0$ then no claim has occurred. Typically we assume that conditional on $N=n$, $X_{1},X_{2},\ldots ,X_{n}$ are independent and identically distributed random variables. 
+
+The distribution of $N$ is known as the frequency distribution, and the common distribution of $X$ is known as the severity distribution. We further assume $N$ and $X$ are independent. With the collective risk model, we may decompose the aggregate losses into the frequency $(N)$ process and the severity $(X)$ model. This flexibility allows the analyst to comment on these two separate components. For example, sales growth due to lower underwriting standards could lead to higher frequency of losses but might not affect severity. Similarly, inflation or other economic forces could have an impact on severity but not on frequency.
+
+## Individual Risk Model
+As discussed previously, for the individual risk model, we think of $X_i$ as the loss from $i^{th}$ contract and interpret \[S_n=X_1 +X_2 +\cdots+X_n,\] to be the aggregate loss from all contracts in a portfolio or group of contracts. Here, the $X_i$'s are not necessarily identically distributed and we have 
+$${\rm E}(S_n) = \sum_{i=1}^{n} {\rm E}(X_i)~.$$ Under the independence assumption on $X_i$'s (i.e. $\mathrm{Cov}\left( X_i, X_j \right) = 0$ for all $i \neq j$), it can further be shown that 
+
+\begin{equation*}
+    {\rm Var}(S_n) = \sum_{i=1}^{n} {\rm Var}(X_i) 
+\end{equation*} 
+
+## Collective Risk Model 
+The collective model $S_N=X_1+\cdots+X_N$ are independent and identically distributed, and independent of $N$. 
+Let $\mu = {\rm E}\left( X_{i}\right)$ and $\sigma ^{2} = {\rm Var}\left(X_{i}\right)$ for all $i$. 
+
+Thus, conditional on $N$, we have that the expectation of the sum is the sum of expectations and that the variance of the sum is the sum of variances,
+
+\begin{align*}
+{\rm E}(S|N) &= {\rm E}(X_1 + \cdots + X_N|N) = \mu N \\
+{\rm Var}(S|N) &= {\rm Var}(X_1 + \cdots + X_N|N) = \sigma^2 N .
+\end{align*} 
+
+The mean aggregate loss, using iterated expected values, is 
+$${\rm E}(S_N)={\rm E}_N[{\rm E}_S(S|N)] = {\rm E}_N(N\mu) = \mu ~{\rm E}(N).$$
+The variance of the aggregate loss is, using the law of total variance, is 
+
+\begin{align*}
+{\rm Var}(S_N) &= {\rm E}_N[{\rm Var}(S_N|N)] + {\rm Var}_N[{\rm E}(S_N|N)] \\
+&= \mathrm{E}_N \left[ \sigma^2 N \right] + \mathrm{Var}_N\left[ \mu N \right] \\
+&=\sigma^2~{\rm E}[N] + \mu^2~ {\rm Var}[N] .
+\end{align*} 
+
+If the frequency is Poisson distributed, i.e. $N \sim Poi (\lambda)$, we have the special case of a __Compound Poisson__ 
+\begin{align*}
+\mathrm{E}(N) &= \mathrm{Var}(N) = \lambda\\
+\mathrm{E}(S_N) &= \lambda ~\mathrm{E}(X)\\
+\mathrm{Var}(S_N) &= \lambda (\sigma^2 + \mu^2) = \lambda ~\mathrm{E} (X^2) .
+\end{align*} 
+
+## Exponential Dispersion Models (Tweedie Models) 
+
+We explore a special compound distribution where the number of claims has a Poisson distribution and the amount of claims has a gamma distribution. This type of compound Poisson is known as __Tweedie Distribution.__ Each claim size $X_i$ follows a gamma distribution with shape parameter $\alpha$ and scale parameter $\gamma$. 
+
+When no claims occur, the aggregate loss is zero, that is, 
+$${\rm Pr}(S_N=0)= {\rm Pr}(N=0)=e^{-\lambda}.$$
+
+The Tweedie distribution is considered a mixture of zero and a positive valued distribution, which makes it a convenient tool for modeling insurance claims and for calculating pure premiums. The mean and variance of the Tweedie compound Poisson model are:
+
+\[{\rm E} (S_N)=\lambda{\alpha}{\beta}~~~~{\rm and}~~~~{\rm Var} (S_N)=\lambda{\alpha{\beta^2}(1+\alpha)}.\]
+
+## Simulation 
+For aggregate losses, the idea is that one can calculate the empirical distribution of $S_N$ using a random sample. The expected value and variance of the aggregate loss can also be estimated using the sample mean and sample variance of the simulated values.
+
+### Example
+
+Consider an insurance company that sells liability motor insurance with individual's claim frequency $N$ following a Poisson distribution with mean $\lambda=25$ and claim severity $X$ follows the Gamma distribution with shape parameter $\alpha = 5$ and scale parameter $\beta = 300$. Using a simulated sample of 10,000 observations, we could estimate the mean and variance of the aggregate loss $S_N$ as given below; 
+
+```{r} 
+tweedie <- function(lambda, alpha, beta){
+S_N = 0
+for (j in 1:10000) {
+  N <- rpois(1, lambda)
+  X <- rgamma(N, alpha, 1/beta)
+  S_N[j] <- sum(X)
+}
+
+m <- paste("The mean aggregate loss is ", round(mean(S_N), 2))
+v <-paste("and the variance of the aggregate loss is ", round(var(S_N),2))
+return(c(m,v))
+}
+value <- tweedie(25, 5,300)
+```
+
+ `r value`.
+
+# References
+
+---
+nocite: '@*'
+...
