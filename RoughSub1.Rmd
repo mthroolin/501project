@@ -49,6 +49,9 @@ A compound Poisson process $S(t)$ is defined as follows:
 \item $N(t) =0 \implies S(0) = 0$.
 \end{enumerate}
 
+## Gamma Distribution Expected Value and Variance
+A Gamma distribution $X \sim Gamma(\alpha, \beta)$ has an expected value of $E(X) = \alpha\beta$ and variance $Var(X) = \alpha\beta^2$.
+
 # Applications of Compound Poisson 
 
 _In 1993, the Chicago Board of Trade introduced a futures contract on financial index that reflects the insurance claims emerging from catastrophes in a portfolio of policies. A compound Poisson model was used to model the contract when the frequency of the catastrophe was counted using the Poisson process._
