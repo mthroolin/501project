@@ -1,0 +1,29 @@
+---
+title: "PeerReview for Carol, Gifty, and Patrick"
+author: "By Michael Throolin"
+date: ""
+output: pdf_document
+---
+
+# Concept (10 pts)
+
+- It's cool how you incorporate examples to present the concept.
+
+- Consider giving formal mathematical definitions for poisson processes
+
+# Exploration (15 pts)
+
+There are a couple of jumps that are unclear.
+
+- On page 4, why is $K_X \sim POIS$? Consider defining $X \sim EXP$ in text rather than in a footnote. This might help the reader understand why $K_X \sim POIS$.
+
+- On page 6, you jump to $P_X$ being constant, $B_X = 0$,  and $A_X \sim EXP$ with no explanation. Then a paragraph later, you change those values. This was a little confusing to the reader as in the first read-through it seemed the general case for all $S_X$, not just in the examples given.  
+
+# Organization & Grammer (10 pts)
+
+ - See pdf markings
+
+
+# Structure/Style (5 pts)
+
+- Everything appears to be neat, all components are present.
