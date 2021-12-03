@@ -1,6 +1,6 @@
 ---
-title: "PeerReview for Carol, Gifty, and Patrick"
-author: "By Michael Throolin"
+title: "Peer Review for Carol, Gifty, and Patrick"
+author: "By Michael T., Noah, and Seth"
 date: ""
 output: pdf_document
 ---
@@ -11,9 +11,11 @@ output: pdf_document
 
 - Consider giving formal mathematical definitions for poisson processes
 
+- On page 1, you start a definition of a probability density function, but the definition is not complete (there is more to a PDF than just having the area underneath it equal 1)
+
 # Exploration (15 pts)
 
-There are a couple of jumps that are unclear.
+There are a couple of jumps that are unclear:
 
 - On page 4, why is $K_X \sim POIS$? Consider defining $X \sim EXP$ in text rather than in a footnote. This might help the reader understand why $K_X \sim POIS$.
 
