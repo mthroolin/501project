@@ -13,12 +13,12 @@ bibliography: bibliography.bib
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, options(scipen=999))
 ```
 
 # Introduction 
 
-The objective of this project is to study a probability model to describe the aggregate claims by an insurance system occurring in a finite time period. The insurance system could be a single policy, a group insurance contract, a business line, or an entire book of an insurer's business. In this study, aggregate claims refer to either the number or the amount of claims from a portfolio of insurance contracts. However, the modeling framework can be readily applied in the more general setup.
+The objective of this project is to study a probability model used to describe the aggregate claims by an insurance system occurring in a finite time period. The insurance system could be a single policy, a group insurance contract, a business line, or an entire book of an insurer's business. In this study, aggregate claims refer to either the number or the amount of claims from a portfolio of insurance contracts. However, the modeling framework can be readily applied in the more general setup.
 
 In actuarial applications we often work with loss distributions for insurance products. The Compound Poisson distribution arises in many situations in the theory of risk. For example, in property and casualty insurance, we may develop a compound Poisson model for the losses under a single policy or a whole portfolio of policies. Similarly, in life insurance, we may develop a loss distribution for a portfolio of policies, often by stochastic simulation. 
 
@@ -35,10 +35,10 @@ A random process $\{N(t), t \in [0,\infty) \}$ is a counting process if,
 \end{enumerate}
 
 ## Poisson Processes
-A counting process $N(t)$ is a Poisson process with rate $\lambda$ if,
+A counting process $N(t)$ is a Poisson process with rate $\lambda(t)$ if,
 \begin{enumerate}
 \item $N(t)$ has independent increments. That is the set $N(t_j+s_j)-N(t_j) ,~ j \in \{0,1,2,...,n\}$ is independent for each non-overlapping increment $(t_j, t_j+s_j]$.
-\item For all $ t \geq 0$ and $h >0$ ,  $N(t+h) -N(t)  \sim POIS(\Lambda)$ where $\Lambda = \int_t^{t+h} \lambda (z) dz$.
+\item For all $ t \geq 0$ and $s_j >0$ ,  $N(t+s_j) -N(t)  \sim POIS(\Lambda)$ where $\Lambda = \int_t^{t+h} \lambda (z) dz$. Note that this implies that $\lim_{s_j \to 0} \Lambda = 0.$
 \end{enumerate}
 
 ## Compound Poisson Process
@@ -76,21 +76,21 @@ The distribution of $N$ is known as the frequency distribution, and the common d
 
 ## Individual Risk Model
 As discussed previously, for the individual risk model, we think of $X_i$ as the loss from $i^{th}$ contract and interpret \[S_n=X_1 +X_2 +\cdots+X_n,\] to be the aggregate loss from all contracts in a portfolio or group of contracts. Here, the $X_i$'s are not necessarily identically distributed and we have 
-$${\rm E}(S_n) = \sum_{i=1}^{n} {\rm E}(X_i)~.$$ Under the independence assumption on $X_i$'s (i.e. $\mathrm{Cov}\left( X_i, X_j \right) = 0$ for all $i \neq j$), it can further be shown that 
+$${\rm E}(S_n) = \sum_{i=1}^{n} {\rm E}(X_i)~.$$ Under the independence assumption on $X_i$'s (i.e. $\mathrm{Cov}\left( X_i, X_j \right) = 0$ for all $i \neq j$),
 
 \begin{equation*}
-    {\rm Var}(S_n) = \sum_{i=1}^{n} {\rm Var}(X_i) 
-\end{equation*} 
+    {\rm Var}(S_n) = \sum_{i=1}^{n} {\rm Var}(X_i) .
+\end{equation*}
 
 ## Collective Risk Model 
 The collective model $S_N=X_1+\cdots+X_N$ are independent and identically distributed, and independent of $N$. 
 Let $\mu = {\rm E}\left( X_{i}\right)$ and $\sigma ^{2} = {\rm Var}\left(X_{i}\right)$ for all $i$. 
 
-Thus, conditional on $N$, we have that the expectation of the sum is the sum of expectations and that the variance of the sum is the sum of variances,
+Thus, conditional on $N=n$, we have that the expectation of the sum is the sum of expectations and that the variance of the sum is the sum of variances,
 
 \begin{align*}
-{\rm E}(S|N) &= {\rm E}(X_1 + \cdots + X_N|N) = \mu N \\
-{\rm Var}(S|N) &= {\rm Var}(X_1 + \cdots + X_N|N) = \sigma^2 N .
+{\rm E}(S|N=n) &= {\rm E}(X_1 + \cdots + X_N|N=n) = \mu n \\
+{\rm Var}(S|N=n) &= {\rm Var}(X_1 + \cdots + X_N|N=n) = \sigma^2 n .
 \end{align*} 
 
 The mean aggregate loss, using iterated expected values, is 
@@ -136,15 +136,15 @@ for (j in 1:10000) {
   X <- rgamma(N, alpha, 1/beta)
   S_N[j] <- sum(X)
 }
+m <- round(mean(S_N), 2)
+sd <- round(sd(S_N), 2)
 
-m <- paste("The mean aggregate loss is ", round(mean(S_N), 2))
-v <-paste("and the variance of the aggregate loss is ", round(var(S_N),2))
-return(c(m,v))
+return(c(m,sd))
 }
 value <- tweedie(25, 5,300)
 ```
 
- `r value`.
+ The mean aggregate loss is \$`r value[1]` with a standard deviation of \$`r value[2]`.
 
 # References
 
