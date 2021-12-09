@@ -49,8 +49,6 @@ A compound Poisson process $S(t)$ is defined as follows:
 \item $N(t) =0 \implies S(0) = 0$.
 \end{enumerate}
 
-## Gamma Distribution Expected Value and Variance
-A Gamma distribution $X \sim Gamma(\alpha, \beta)$ has an expected value of $E(X) = \alpha\beta$ and variance $Var(X) = \alpha\beta^2$.
 
 # Applications of Compound Poisson 
 
@@ -112,7 +110,7 @@ If the frequency is Poisson distributed, i.e. $N \sim Poi (\lambda)$, we have th
 
 ## Exponential Dispersion Models (Tweedie Models) 
 
-We explore a special compound distribution where the number of claims has a Poisson distribution and the amount of claims has a gamma distribution. This type of compound Poisson is known as __Tweedie Distribution.__ Each claim size $X_i$ follows a gamma distribution with shape parameter $\alpha$ and scale parameter $\gamma$. 
+We explore a special compound distribution where the number of claims has a Poisson distribution and the amount of claims has a gamma distribution. This type of compound Poisson is known as __Tweedie Distribution.__ Each claim size follows a gamma distribution, $X_i \sim Gamma(\alpha, \beta)$, with an expected value of $E(X) = \alpha\beta$ and variance $Var(X) = \alpha\beta^2$.
 
 When no claims occur, the aggregate loss is zero, that is, 
 $${\rm Pr}(S_N=0)= {\rm Pr}(N=0)=e^{-\lambda}.$$
@@ -128,25 +126,28 @@ For aggregate losses, the idea is that one can calculate the empirical distribut
 
 Consider an insurance company that sells liability motor insurance with individual's claim frequency $N$ following a Poisson distribution with mean $\lambda=25$ and claim severity $X$ follows the Gamma distribution with shape parameter $\alpha = 5$ and scale parameter $\beta = 300$. Using a simulated sample of 10,000 observations, we could estimate the mean and variance of the aggregate loss $S_N$ as given below; 
 
-```{r} 
+```{r, message=FALSE,results='hide'} 
 tweedie <- function(lambda, alpha, beta){
-S_N = 0
-for (j in 1:10000) {
-  N <- rpois(1, lambda)
-  X <- rgamma(N, alpha, 1/beta)
-  S_N[j] <- sum(X)
+  S_N = 0
+  for (j in 1:10000) {
+    N <- rpois(1, lambda)
+    X <- rgamma(N, alpha, 1/beta)
+    S_N[j] <- sum(X)
+  }
+  m <- round(mean(S_N), 2)
+  sd <- round(sd(S_N), 2)
+  print(hist(S_N, main = "Distribution Plot for Tweedie Distribution", xlab = "Aggregate losses"))
+  return(c(m,sd))
 }
-m <- round(mean(S_N), 2)
-sd <- round(sd(S_N), 2)
 
-return(c(m,sd))
-}
 value <- tweedie(25, 5,300)
 ```
 
  The simualted mean aggregate loss is \$`r value[1]` with a standard deviation of \$`r value[2]`. This compares favorably with theory based methods as we would estimate our mean aggregate loss to be
  $E(S_N) = \lambda\alpha\beta = 25(5(300))= \$ 37,500$
   with a standard deviation of $\sqrt{Var(S_N)} = \sqrt{\lambda{\alpha{\beta^2}(1+\alpha)}} = \sqrt{25(5)(300)^2(1+5)} = \$8215.84$. 
+  
+  We would expect the aggregate loss of the insurance company to be within \$8,215.84 of \$37,500 on average. This mean the insurer would expect the true aggregate loss to be within $\$37,335.68$ and $\$37,664.32$
 
 # References
 
