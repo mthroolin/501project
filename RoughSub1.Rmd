@@ -147,7 +147,11 @@ value <- tweedie(25, 5,300)
  $E(S_N) = \lambda\alpha\beta = 25(5(300))= \$ 37,500$
   with a standard deviation of $\sqrt{Var(S_N)} = \sqrt{\lambda{\alpha{\beta^2}(1+\alpha)}} = \sqrt{25(5)(300)^2(1+5)} = \$8215.84$. 
   
-  We would expect the aggregate loss of the insurance company to be within \$8,215.84 of \$37,500 on average. This mean the insurer would expect the true aggregate loss to be within $\$37,335.68$ and $\$37,664.32$
+  We would expect the aggregate loss of the insurance company to be within \$8,215.84 of \$37,500 on average. This means the insurer would expect the true aggregate loss to be within $\$37,335.68$ and $\$37,664.32$
+
+# Conclusion
+
+The objective of our work thus far has helped us to better understand how to model the aggregate claims an insurance company will receive within a finite time period. We defined and used Compound Poisson Processes to model individual and collective risks and then moved on to Tweedie models to find the expected aggregate loss an insurance company would accrue by selling liability motor insurance. More generally, Compound Poisson Processes are useful in modelling several problems that arise within actuarial science or queuing theory in general.
 
 # References
 
