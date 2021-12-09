@@ -144,7 +144,9 @@ return(c(m,sd))
 value <- tweedie(25, 5,300)
 ```
 
- The mean aggregate loss is \$`r value[1]` with a standard deviation of \$`r value[2]`.
+ The simualted mean aggregate loss is \$`r value[1]` with a standard deviation of \$`r value[2]`. This compares favorably with theory based methods as we would estimate our mean aggregate loss to be
+ $E(S_N) = \lambda\alpha\beta = 25(5(300))= \$ 37,500$
+  with a standard deviation of $\sqrt{Var(S_N)} = \sqrt{\lambda{\alpha{\beta^2}(1+\alpha)}} = \sqrt{25(5)(300)^2(1+5)} = \$8215.84$. 
 
 # References
 
